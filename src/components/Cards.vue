@@ -2,9 +2,30 @@
 import Card from './Card.vue'
 </script>
 
+<script>
+
+    export default {
+        data() {
+            return {
+                countries: []
+            }
+        },
+        async mounted() {
+            const response = await fetch('https://restcountries.com/v3.1/all?fields=name,flags,capital,population,alpha3Code,region')
+            const countries = await response.json()
+            this.countries = countries
+        },
+    }
+
+</script>
+
 <template>
     <div class="cards-wrapper">
-        <Card v-for="n in 10" :key="n"/>
+        <Card 
+            v-for="country in countries" 
+            :key="country.name"
+            :country="country"
+        />
     </div>
 </template>
 

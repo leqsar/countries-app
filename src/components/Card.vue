@@ -4,18 +4,23 @@
 
 <script>
     export default {
-        props: ['imgSrc', 'name', 'population', 'region', 'capital']
+        props: ['country'],
+        methods: {
+            show() {
+                console.log(this.country)
+            }
+        }
     }
 
 </script>
 
 <template>
-    <div class="card-wrapper">
-        <img src="imgSrc" alt="Flag">
-        <h2>{{ name }}</h2>
-        <p><b>Population</b>: {{ population }}</p>
-        <p><b>Region</b>: {{ region }}</p>
-        <p><b>Capital</b>: {{ capital }}</p>
+    <div class="card-wrapper" @click="show">
+        <img :src="country.flags.png" alt="Flag">
+        <h2>{{ country.name.common }}</h2>
+        <p><b>Population:</b> {{ country.population }}</p>
+        <p><b>Region:</b> {{ country.region }}</p>
+        <p><b>Capital:</b> {{ country.capital[0] }}</p>
     </div>
 </template>
 
@@ -32,16 +37,19 @@
         img
             width: 100%
             height: 160px
+            border-top-left-radius: 10px
+            border-top-right-radius: 10px
+            object-fit: cover
 
         h2
-            margin: 30px 30px
+            margin: 25px 30px
+            font-size: 18px
+            line-height: 18px
+            height: 36px
 
         p
             margin-left: 30px
-            margin-top: 10px
-
-        p:first-of-type
-            margin-top: 0
+            
 
 
 </style>
