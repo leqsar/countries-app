@@ -5,17 +5,12 @@
 <script>
     export default {
         props: ['country'],
-        methods: {
-            show() {
-                console.log(this.country)
-            }
-        }
     }
 
 </script>
 
 <template>
-    <div class="card-wrapper" @click="show">
+    <div class="card-wrapper">
         <img :src="country.flags.png" alt="Flag">
         <h2>{{ country.name.common }}</h2>
         <p><b>Population:</b> {{ country.population }}</p>

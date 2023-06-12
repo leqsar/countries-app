@@ -1,5 +1,4 @@
 <script setup>
-    import CustomSelect from './CustomSelect.vue'
 </script>
 
 <script>
@@ -7,9 +6,10 @@
         data() {
             return {
                 searchQuery: '',
-                filter: ''
+                regionsArray: ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania', 'All' ],
             }
-        }
+        },
+        props: ['filter', 'isOpen'],
     }
 
 </script>
@@ -20,7 +20,17 @@
             <img class="search-icon" src="../assets/search.svg" alt="Search icon">
             <input type="text" v-model="searchQuery" placeholder="Search for a country...">
         </form>
-        <CustomSelect />
+        <div class="filter-wrapper">
+            <div class="current-filter-wrapper" @click="$emit('openMenu')">
+                <p>{{ filter }}</p>
+                <div class="custom-arrow"></div>
+            </div>
+            <ul class="region-select" v-show="isOpen">
+                <li v-for="region in regionsArray" key="region" @click="$emit('setFilter', region)">
+                    {{ region }}
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -68,16 +78,46 @@
                     border: none
                     outline: none
 
-        .region-select
+        .filter-wrapper
             width: 200px
-            height: 60px
-            font: 
-                size: $homepageFont
-                family: 'Nunito Sans', sans-serif
-            border: none
-            padding: 0 25px
+            position: relative
 
-            &:focus
-                outline: none
+            .current-filter-wrapper
+                display: flex
+                align-items: center
+                justify-content: space-between
+                width: 100%
+                height: 60px
+                padding: 0 25px
+                border-radius: 10px
+                box-shadow: 0 4px 4px 4px $shadowColor
+                box-sizing: border-box
+
+                &:hover
+                    cursor: pointer
+
+                .custom-arrow
+                    width: 10px
+                    height: 10px
+                    border-top: 2px solid black 
+                    border-left: 2px solid black 
+                    transform: rotate(225deg)
+
+            .region-select
+                position: absolute
+                display: flex
+                flex-direction: column
+                justify-content: space-between
+                width: 100%
+                height: 200px
+                padding: 20px 25px
+                box-sizing: border-box
+                border-radius: 10px
+                box-shadow: 0 4px 4px 4px $shadowColor
+                background-color: $lightModeElements
+
+                li
+                    &:hover
+                        cursor: pointer
     
 </style>
