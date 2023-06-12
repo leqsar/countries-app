@@ -78,6 +78,7 @@
             box-sizing: border-box
             border-radius: 10px
             box-shadow: 0 4px 4px 4px $shadowColor
+            background-color: $lightModeElements
 
             li
                 &:hover

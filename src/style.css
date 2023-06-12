@@ -10,6 +10,7 @@ body p, body h1, body h2, body span, body li, body ul, body a, body button {
   padding: 0;
   text-decoration: none;
   list-style-type: none;
+  color: hsl(200, 15%, 8%);
 }
 
 /*# sourceMappingURL=style.css.map */
