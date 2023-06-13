@@ -9,7 +9,7 @@
                 regionsArray: ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania', 'All' ],
             }
         },
-        props: ['filter', 'isOpen'],
+        props: ['filter', 'isOpen', 'mode'],
     }
 
 </script>
@@ -53,7 +53,7 @@
             align-items: center
             gap: 20px
             border-radius: 5px
-            background-color: $lightModeElements
+            background-color: v-bind('mode.elementColor')
             box-shadow: 0 2px 2px $shadowColor
             padding: 0 30px
             box-sizing: border-box
@@ -66,13 +66,15 @@
                 width: 100%
                 height: 50%
                 border: none
-                color: $lightModeText
                 letter-spacing: 1px
-                color: $lightModeInput
+                color: v-bind('mode.fontColor')
+                background-color: inherit
                 font: 
                     size: $homepageFont
                     family: 'Nunito Sans', sans-serif
-                
+
+                &::placeholder
+                    color: v-bind('mode.fontColor')
 
                 &:focus
                     border: none
@@ -81,6 +83,7 @@
         .filter-wrapper
             width: 200px
             position: relative
+            color: v-bind('mode.fontColor')
 
             .current-filter-wrapper
                 display: flex
@@ -91,6 +94,7 @@
                 padding: 0 25px
                 border-radius: 10px
                 box-shadow: 0 4px 4px 4px $shadowColor
+                background-color: v-bind('mode.elementColor')
                 box-sizing: border-box
 
                 &:hover
@@ -99,8 +103,8 @@
                 .custom-arrow
                     width: 10px
                     height: 10px
-                    border-top: 2px solid black 
-                    border-left: 2px solid black 
+                    border-top: 2px solid v-bind('mode.fontColor')
+                    border-left: 2px solid v-bind('mode.fontColor') 
                     transform: rotate(225deg)
 
             .region-select
@@ -114,7 +118,7 @@
                 box-sizing: border-box
                 border-radius: 10px
                 box-shadow: 0 4px 4px 4px $shadowColor
-                background-color: $lightModeElements
+                background-color: v-bind('mode.elementColor')
 
                 li
                     &:hover

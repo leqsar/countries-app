@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        props: ['country'],
+        props: ['country', 'mode'],
     }
 
 </script>
@@ -28,6 +28,8 @@
         height: 340px
         border-radius: 10px
         box-shadow: 0 2px 2px 2px $shadowColor
+        background-color: v-bind('mode.elementColor')
+        color: v-bind('mode.fontColor')
 
         img
             width: 100%

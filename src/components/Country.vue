@@ -2,7 +2,7 @@
 
 <script>
 export default {
-  props: ["country", "countries"],
+  props: ["country", "countries", 'mode'],
   methods: {
     nativeName() {
       const nativeLang = Object.keys(this.country.languages)[0];
@@ -80,6 +80,7 @@ export default {
     width: 100%
     padding: 0 80px
     margin-top: 80px
+    color: v-bind('mode.fontColor')
 
     .return-button
         display: flex
@@ -88,10 +89,12 @@ export default {
         width: 140px
         height: 40px
         padding: 0 30px
-        background-color: $lightModeElements
+        background-color: v-bind('mode.backColor')
+        color: v-bind('mode.fontColor')
         border: none
         font-size: $detailsFont
         box-shadow: 0 2px 2px 2px $shadowColor
+        border-radius: 5px
 
         &:hover
             cursor: pointer
@@ -145,9 +148,10 @@ export default {
                         width: auto
                         height: 30px
                         padding: 0 30px
-                        background-color: $lightModeElements
+                        background-color: v-bind('mode.backColor')
                         box-sizing: border-box
                         box-shadow: 0 3px 3px 3px $shadowColor
+                        border-radius: 5px
 
                         &:hover
                             cursor: pointer

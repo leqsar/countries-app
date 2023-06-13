@@ -15,7 +15,8 @@ import Country from './components/Country.vue'
         countries: [],
         filteredCountries: [],
         showDetails: false,
-        chosenCountry: {}
+        chosenCountry: {},
+        modeStatus: 'light'
       }
     },
     methods: {
@@ -29,12 +30,15 @@ import Country from './components/Country.vue'
       openDetails(country){
         this.chosenCountry = country
         this.showDetails = true
-        console.log(country);
       },
       showBorderDetails(countryName) {
         this.chosenCountry = this.countries.filter((country) => {
           return country.name.common===countryName
         })[0]
+      },
+      setMode() {
+        console.log(this.modeStatus)
+        this.modeStatus = this.modeStatus === 'light' ? 'dark' : 'light'
       },
       showHome(){
         this.showDetails = false
@@ -53,6 +57,22 @@ import Country from './components/Country.vue'
           return this.filteredCountries
         }
         return this.countries
+      },
+      mode() {
+        if(this.modeStatus === 'dark') {
+          return {
+            nextStatus: 'Light',
+            backColor: 'hsl(207, 26%, 17%)',
+            fontColor: 'hsl(0, 0%, 100%)',
+            elementColor: 'hsl(209, 23%, 22%)'
+          }
+        } 
+        return {
+          nextStatus: 'Dark',
+          backColor: 'hsl(0, 0%, 98%)',
+          fontColor: 'hsl(200, 15%, 8%)',
+          elementColor: 'hsl(0, 0%, 100%)'
+        }
       }
     },
     async mounted() {
@@ -65,24 +85,32 @@ import Country from './components/Country.vue'
 </script>
 
 <template>
-  <Header />
+  <Header :mode="mode" @switch-mode="setMode"/>
   <FilterBlock 
     :filter="filter" 
-    :isOpen="isOpen" 
+    :isOpen="isOpen"
+    :mode="mode"
     @set-filter="setFilter" 
     @open-menu="openMenu"
     v-if="!showDetails"
   />
-  <Cards :displayedCountries="displayedCountries" @open-details="openDetails" v-if="!showDetails"/>
+  <Cards 
+    :displayedCountries="displayedCountries"
+    :mode="mode"
+    @open-details="openDetails" 
+    v-if="!showDetails"
+  />
   <Country 
     :country="chosenCountry" 
-    :countries="countries" 
+    :countries="countries"
+    :mode="mode"
     v-if="showDetails"
     @show-home="showHome"
     @show-border-details="showBorderDetails"
   />
 </template>
 
-<style scoped>
+<style scoped lang="sass">
+  @import './input.sass'
 
 </style>

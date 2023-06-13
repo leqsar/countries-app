@@ -1,13 +1,20 @@
 <script setup>
+</script>
+
+<script>
+    export default {
+        props: ['mode'],
+    }
 
 </script>
 
 <template>
     <header>
         <h1>Where in the world?</h1>
-        <div class="mode-switcher">
-            <img class="dark-mode-icon" src="../assets/moon.svg" alt="Dark mode icon">
-            <p>Dark mode</p>
+        <div class="mode-switcher" @click="$emit('switchMode')">
+            <img v-show="mode.nextStatus==='Dark'" class="dark-mode-icon" src="../assets/moon.svg" alt="Dark mode icon">
+            <img v-show="mode.nextStatus==='Light'" class="light-mode-icon" src="../assets/sunr.svg" alt="Dark mode icon">
+            <p>{{mode.nextStatus}} mode</p>
         </div>
     </header>
 </template>
@@ -22,10 +29,10 @@ header
     display: flex
     align-items: center
     justify-content: space-between
-    color: $lightModeText
+    color: v-bind('mode.fontColor')
+    background-color: v-bind('mode.elementColor')
     padding: 0 80px
     box-sizing: border-box
-    background-color: $lightModeElements
     box-shadow: 0 4px $shadowColor
 
     .mode-switcher
@@ -33,8 +40,11 @@ header
         font-weight: 600
         gap: 10px
 
-        .dark-mode-icon
-            width: 22px
-            height: 22px 
+        &:hover
+            cursor: pointer
 
+        .dark-mode-icon,
+        .light-mode-icon
+            width: 22px
+            height: 22px
 </style>

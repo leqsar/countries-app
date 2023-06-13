@@ -4,7 +4,7 @@ import Card from './Card.vue'
 
 <script>
     export default {
-        props: ['displayedCountries'],
+        props: ['displayedCountries', 'mode'],
     }
 </script>
 
@@ -14,6 +14,7 @@ import Card from './Card.vue'
             v-for="country in displayedCountries" 
             :key="country.name"
             :country="country"
+            :mode="mode"
             @card-click="$emit('openDetails', country)"
         />
     </div>

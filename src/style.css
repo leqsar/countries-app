@@ -3,14 +3,12 @@ body {
   width: min(100%, 1440px);
   margin: 0 auto;
   font-family: "Nunito Sans", sans-serif;
-  background-color: hsl(0, 0%, 98%);
 }
 body p, body h1, body h2, body span, body li, body ul, body a, body button {
   margin: 0;
   padding: 0;
   text-decoration: none;
   list-style-type: none;
-  color: hsl(200, 15%, 8%);
 }
 
 /*# sourceMappingURL=style.css.map */
