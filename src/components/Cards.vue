@@ -14,6 +14,7 @@ import Card from './Card.vue'
             v-for="country in displayedCountries" 
             :key="country.name"
             :country="country"
+            @card-click="$emit('openDetails', country)"
         />
     </div>
 </template>

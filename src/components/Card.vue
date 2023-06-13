@@ -10,7 +10,7 @@
 </script>
 
 <template>
-    <div class="card-wrapper">
+    <div class="card-wrapper" @click="$emit('cardClick', country)">
         <img :src="country.flags.png" alt="Flag">
         <h2>{{ country.name.common }}</h2>
         <p><b>Population:</b> {{ country.population }}</p>
