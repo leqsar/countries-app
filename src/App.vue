@@ -11,12 +11,14 @@ import Country from './components/Country.vue'
     data() {
       return {
         filter: 'Filter by Region',
+        queryString: '',
         isOpen: false,
         countries: [],
         filteredCountries: [],
+        searchResults: [],
         showDetails: false,
         chosenCountry: {},
-        modeStatus: 'light'
+        modeStatus: 'light',
       }
     },
     methods: {
@@ -42,17 +44,35 @@ import Country from './components/Country.vue'
       },
       showHome(){
         this.showDetails = false
+        this.setSearchQuery('')
+      },
+      setSearchQuery(searchQuery) {
+        this.queryString = searchQuery
       }
     },
     watch: {
       filter(newRegion) {
-        this.filteredCountries =  this.countries.filter((country) => {
-          return country.region===newRegion
+        if(newRegion !== '') {
+          this.filteredCountries =  this.countries.filter((country) => {
+            return country.region===newRegion
+          })
+        }
+      },
+      queryString(newValue) {
+        const editedString = newValue.toLowerCase()
+        this.searchResults =  this.countries.filter((country) => {
+          return country.name.common.toLowerCase()===editedString
         })
-      }
+      },
     },
     computed: {
       displayedCountries() {
+        if(this.searchResults.length > 0) {
+          if(this.filteredCountries.length > 0) {
+            return this.filteredCountries
+          }
+          return this.searchResults
+        }
         if(this.filteredCountries.length > 0) {
           return this.filteredCountries
         }
@@ -90,15 +110,16 @@ import Country from './components/Country.vue'
     :filter="filter" 
     :isOpen="isOpen"
     :mode="mode"
+    v-if="!showDetails"
     @set-filter="setFilter" 
     @open-menu="openMenu"
-    v-if="!showDetails"
+    @set-search-query="setSearchQuery"
   />
   <Cards 
     :displayedCountries="displayedCountries"
     :mode="mode"
-    @open-details="openDetails" 
     v-if="!showDetails"
+    @open-details="openDetails" 
   />
   <Country 
     :country="chosenCountry" 
