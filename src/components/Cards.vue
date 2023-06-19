@@ -9,7 +9,7 @@ import Card from './Card.vue'
 </script>
 
 <template >
-    <div class="loader" v-cloak="true"></div>
+    <!-- <div class="loader"></div> -->
     <div class="cards-wrapper">
         <Card 
             v-for="country in displayedCountries" 
@@ -39,9 +39,9 @@ import Card from './Card.vue'
         position: absolute
         top: 15px
         left: 500px
-        width: 30px
-        height: 30px
-        border-radius: 15px
+        width: 20px
+        height: 20px
+        border-radius: 10px
         border-top: 2px solid v-bind('mode.fontColor')
         border-left: 2px solid v-bind('mode.fontColor')
         animation: loading 1.25s linear infinite

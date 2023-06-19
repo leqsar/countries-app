@@ -27,7 +27,7 @@
         width: 100%
         height: 340px
         border-radius: 10px
-        box-shadow: 0 2px 2px 2px $shadowColor
+        box-shadow: 0 2px 2px 2px v-bind('mode.shadowColor')
         background-color: v-bind('mode.elementColor')
         color: v-bind('mode.fontColor')
 

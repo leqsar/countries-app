@@ -33,7 +33,7 @@ header
     background-color: v-bind('mode.elementColor')
     padding: 0 80px
     box-sizing: border-box
-    box-shadow: 0 4px $shadowColor
+    box-shadow: 0 4px v-bind('mode.shadowColor')
 
     .mode-switcher
         display: flex

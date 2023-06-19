@@ -65,7 +65,7 @@ export default {
         gap: 20px
         border-radius: 5px
         background-color: v-bind('mode.elementColor')
-        box-shadow: 0 2px 2px $shadowColor
+        box-shadow: 0 2px 2px v-bind('mode.shadowColor')
         padding: 0 30px
         box-sizing: border-box
 
@@ -107,7 +107,7 @@ export default {
             height: 60px
             padding: 0 25px
             border-radius: 10px
-            box-shadow: 0 4px 4px 4px $shadowColor
+            box-shadow: 0 4px 4px 4px v-bind('mode.shadowColor')
             background-color: v-bind('mode.elementColor')
             box-sizing: border-box
 
@@ -131,7 +131,7 @@ export default {
             padding: 20px 25px
             box-sizing: border-box
             border-radius: 10px
-            box-shadow: 0 4px 4px 4px $shadowColor
+            box-shadow: 0 4px 4px 4px v-bind('mode.shadowColor')
             background-color: v-bind('mode.elementColor')
 
             li

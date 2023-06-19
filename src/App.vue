@@ -84,14 +84,18 @@ import Country from './components/Country.vue'
             nextStatus: 'Light',
             backColor: 'hsl(207, 26%, 17%)',
             fontColor: 'hsl(0, 0%, 100%)',
-            elementColor: 'hsl(209, 23%, 22%)'
+            elementColor: 'hsl(209, 23%, 22%)',
+            shadowColor: '#1f2c35'
           }
-        } 
-        return {
-          nextStatus: 'Dark',
-          backColor: 'hsl(0, 0%, 98%)',
-          fontColor: 'hsl(200, 15%, 8%)',
-          elementColor: 'hsl(0, 0%, 100%)'
+        }
+        if(this.modeStatus === 'light') {
+          return {
+            nextStatus: 'Dark',
+            backColor: 'hsl(0, 0%, 98%)',
+            fontColor: 'hsl(200, 15%, 8%)',
+            elementColor: 'hsl(0, 0%, 100%)',
+            shadowColor: '#f2f2f2'
+          }
         }
       }
     },
@@ -105,33 +109,47 @@ import Country from './components/Country.vue'
 </script>
 
 <template>
-  <Header :mode="mode" @switch-mode="setMode"/>
-  <FilterBlock 
-    :filter="filter" 
-    :isOpen="isOpen"
-    :mode="mode"
-    v-if="!showDetails"
-    @set-filter="setFilter" 
-    @open-menu="openMenu"
-    @set-search-query="setSearchQuery"
-  />
-  <Cards 
-    :displayedCountries="displayedCountries"
-    :mode="mode"
-    v-if="!showDetails"
-    @open-details="openDetails" 
-  />
-  <Country 
-    :country="chosenCountry" 
-    :countries="countries"
-    :mode="mode"
-    v-if="showDetails"
-    @show-home="showHome"
-    @show-border-details="showBorderDetails"
-  />
+  <div class="app-mode-wrapper">
+    <div class="app-wrapper">
+      <Header :mode="mode" @switch-mode="setMode"/>
+      <FilterBlock 
+        :filter="filter" 
+        :isOpen="isOpen"
+        :mode="mode"
+        v-if="!showDetails"
+        @set-filter="setFilter" 
+        @open-menu="openMenu"
+        @set-search-query="setSearchQuery"
+      />
+      <Cards 
+        :displayedCountries="displayedCountries"
+        :mode="mode"
+        v-if="!showDetails"
+        @open-details="openDetails" 
+      />
+      <Country 
+        :country="chosenCountry" 
+        :countries="countries"
+        :mode="mode"
+        v-if="showDetails"
+        @show-home="showHome"
+        @show-border-details="showBorderDetails"
+      />
+    </div>
+  </div>
 </template>
 
 <style scoped lang="sass">
   @import './input.sass'
+
+  .app-mode-wrapper
+    width: 100%
+    height: 100%
+    background-color: v-bind('mode.backColor')
+
+    .app-wrapper
+      width: min(100%, 1440px)
+      margin: 0 auto
+    
 
 </style>
