@@ -149,6 +149,8 @@ import Country from './components/Country.vue'
 
     .app-wrapper
       width: min(100%, 1440px)
+      min-height: 100vh
+      height: max-content
       margin: 0 auto
     
 

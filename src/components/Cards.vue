@@ -35,6 +35,13 @@ import Card from './Card.vue'
         padding: 0 80px
         box-sizing: border-box
 
+        @media screen and (max-width: 400px) 
+            width: 90%
+            margin: 50px auto
+            padding: 0 5%
+            row-gap: 40px
+            grid-template-columns: 1fr
+
     .loader
         position: absolute
         top: 15px

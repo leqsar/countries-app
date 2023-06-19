@@ -35,10 +35,21 @@ header
     box-sizing: border-box
     box-shadow: 0 4px v-bind('mode.shadowColor')
 
+    @media screen and (max-width: 400px) 
+        padding: 0 20px
+
+        h1
+            font-size: 20px
+        
+
     .mode-switcher
         display: flex
         font-weight: 600
         gap: 10px
+
+        @media screen and (max-width: 400px) 
+            font-size: $homepageFont
+            gap: 5px
 
         &:hover
             cursor: pointer
@@ -47,4 +58,8 @@ header
         .light-mode-icon
             width: 22px
             height: 22px
+
+            @media screen and (max-width: 400px) 
+                width: 18px
+                height: 18px
 </style>

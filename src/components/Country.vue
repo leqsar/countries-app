@@ -78,10 +78,14 @@ export default {
 
 .details-page
     width: 100%
-    height: 100vh
     padding: 0 80px
     margin-top: 80px
     color: v-bind('mode.fontColor')
+
+    @media screen and (max-width: 400px) 
+      padding: 0 20px
+      margin-top: 40px
+      box-sizing: border-box
 
     .return-button
         display: flex
@@ -110,8 +114,16 @@ export default {
         width: 100%
         margin-top: 80px
 
+        @media screen and (max-width: 400px) 
+          margin-top: 40px
+          flex-direction: column
+          gap: 0
+
         .details-img
             width: 560px
+
+            @media screen and (max-width: 400px) 
+              width: 100%
 
         .details-info-wrapper
             width: 600px
@@ -127,6 +139,11 @@ export default {
                 height: 160px
                 margin-top: 40px
 
+                @media screen and (max-width: 400px) 
+                  height: 100%
+                  margin-top: 20px
+
+
                 li
                     font:
                         size: $detailsFont
@@ -135,6 +152,12 @@ export default {
             .border-details
                 display: flex
                 margin-top: 80px
+                
+                @media screen and (max-width: 400px) 
+                  margin-top: 30px
+                  flex-direction: column
+                  gap: 20px
+
 
                 ul
                     display: flex
@@ -142,6 +165,9 @@ export default {
                     flex-wrap: wrap
                     margin-left: 20px
                     gap: 10px
+
+                    @media screen and (max-width: 400px) 
+                      margin-left: 0px
 
                     li
                         display: flex

@@ -57,6 +57,11 @@ export default {
     box-sizing: border-box
     margin-top: 50px
 
+    @media screen and (max-width: 400px) 
+      flex-direction: column
+      gap: 20px
+      padding: 0 20px
+
     .search-form
         width: 480px
         height: 60px
@@ -68,6 +73,9 @@ export default {
         box-shadow: 0 2px 2px v-bind('mode.shadowColor')
         padding: 0 30px
         box-sizing: border-box
+
+        @media screen and (max-width: 400px) 
+          width: 100%
 
         .search-icon
             width: 20px
@@ -98,6 +106,9 @@ export default {
         width: 200px
         position: relative
         color: v-bind('mode.fontColor')
+
+        @media screen and (max-width: 400px) 
+              font-size: $homepageFont
 
         .current-filter-wrapper
             display: flex
