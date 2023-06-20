@@ -2,21 +2,21 @@
 
 <script>
 export default {
+  props: ["filter", "isOpen", "mode"],
   data() {
     return {
-      searchQuery: "",
+      searchQuery: '',
       regionsArray: ["Africa", "Americas", "Asia", "Europe", "Oceania", "All"],
     };
-  },
-  props: ["filter", "isOpen", "mode", "loading"]
+  }
 };
 </script>
 
 <template>
   <div class="forms-wrapper">
     <form
-      @submit.prevent="$emit('setSearchQuery', searchQuery)"
-      action=""
+      @submit.prevent
+      action="submit"
       class="search-form"
     >
       <img class="search-icon" src="../assets/search.svg" alt="Search icon" />
@@ -24,6 +24,7 @@ export default {
         type="text"
         v-model="searchQuery"
         placeholder="Search for a country..."
+        @input="$emit('filter', searchQuery)"
       />
     </form>
     <div class="filter-wrapper">

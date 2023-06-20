@@ -26,6 +26,9 @@ import Country from './components/Country.vue'
         this.filter=region
         this.isOpen=false
       },
+      setNameFilter(searchQuery) {
+        this.queryString = searchQuery
+      },
       openMenu() {
         this.isOpen = !this.isOpen
       },
@@ -39,38 +42,53 @@ import Country from './components/Country.vue'
         })[0]
       },
       setMode() {
-        console.log(this.modeStatus)
         this.modeStatus = this.modeStatus === 'light' ? 'dark' : 'light'
       },
       showHome(){
         this.showDetails = false
-        this.setSearchQuery('')
+        this.queryString = ''
+        this.searchResults = ''
       },
-      setSearchQuery(searchQuery) {
-        this.queryString = searchQuery
+      reset() {
+        this.filter='Filter by Region'
+        this.isOpen=false
+        this.filteredCountries=[]
+        this.searchResults=[]
       }
     },
     watch: {
       filter(newRegion) {
         if(newRegion !== '') {
-          this.filteredCountries =  this.countries.filter((country) => {
-            return country.region===newRegion
-          })
+          if(this.searchResults.length > 0) {
+            this.filteredCountries =  this.searchResults.filter((country) => {
+              return country.region===newRegion
+            })
+          } else {
+            this.filteredCountries =  this.countries.filter((country) => {
+              return country.region===newRegion
+            })
+          }
         }
       },
       queryString(newValue) {
-        const editedString = newValue.toLowerCase()
-        this.searchResults =  this.countries.filter((country) => {
-          return country.name.common.toLowerCase()===editedString
-        })
-      },
+        if(newValue !== '') {
+          const regex = new RegExp(newValue, 'i');
+          if(this.filteredCountries.length > 0) {
+            this.searchResults = this.filteredCountries.filter(element => regex.test(element.name.common));
+          } else {
+            this.searchResults = this.countries.filter(element => regex.test(element.name.common));
+          }
+        } else {
+          this.searchResults=[]
+        }
+      }
     },
     computed: {
       displayedCountries() {
+        if(this.searchResults.length > 0 && this.filteredCountries.length > 0) {
+          return this.filteredCountries.filter(x => this.searchResults.includes(x))
+        }
         if(this.searchResults.length > 0) {
-          if(this.filteredCountries.length > 0) {
-            return this.filteredCountries
-          }
           return this.searchResults
         }
         if(this.filteredCountries.length > 0) {
@@ -111,15 +129,19 @@ import Country from './components/Country.vue'
 <template>
   <div class="app-mode-wrapper">
     <div class="app-wrapper">
-      <Header :mode="mode" @switch-mode="setMode"/>
+      <Header 
+        :mode="mode" 
+        @switch-mode="setMode"
+        @go-home="reset"
+      />
       <FilterBlock 
         :filter="filter" 
         :isOpen="isOpen"
         :mode="mode"
         v-if="!showDetails"
         @set-filter="setFilter" 
+        @filter="setNameFilter"
         @open-menu="openMenu"
-        @set-search-query="setSearchQuery"
       />
       <Cards 
         :displayedCountries="displayedCountries"

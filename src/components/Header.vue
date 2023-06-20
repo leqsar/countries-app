@@ -10,7 +10,7 @@
 
 <template>
     <header>
-        <h1>Where in the world?</h1>
+        <h1 @click="$emit('goHome')">Where in the world?</h1>
         <div class="mode-switcher" @click="$emit('switchMode')">
             <img v-show="mode.nextStatus==='Dark'" class="dark-mode-icon" src="../assets/moon.svg" alt="Dark mode icon">
             <img v-show="mode.nextStatus==='Light'" class="light-mode-icon" src="../assets/sunr.svg" alt="Dark mode icon">
@@ -35,11 +35,15 @@ header
     box-sizing: border-box
     box-shadow: 0 4px v-bind('mode.shadowColor')
 
+    h1:hover
+        cursor: pointer
+
     @media screen and (max-width: 400px) 
         padding: 0 20px
 
         h1
             font-size: 20px
+
         
 
     .mode-switcher
