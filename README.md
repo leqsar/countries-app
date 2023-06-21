@@ -34,7 +34,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [https://www.frontendmentor.io/solutions/rest-countries-api-with-color-theme-switcher-on-vue-iFdNMO6xOB](https://www.frontendmentor.io/solutions/rest-countries-api-with-color-theme-switcher-on-vue-iFdNMO6xOB)
 - Live Site URL: [https://leqsar.github.io/countries-app/](https://leqsar.github.io/countries-app/)
 
 ## My process
